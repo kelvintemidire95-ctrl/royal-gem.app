@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Royal Gem</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f2fb;--card:#fff;--ink:#1d1236;--mut:#6d6486;--p:#6a35d0;--p2:#2a1160;--gold:#f2c14e;--gold2:#d99a1e;--line:#e6def5;--ok:#1f9d63;--bad:#d64545;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#120a24;--card:#1d1236;--ink:#f1ecfb;--mut:#a99fc4;--line:#2f2253}}
+:root[data-theme="dark"]{--bg:#120a24;--card:#1d1236;--ink:#f1ecfb;--mut:#a99fc4;--line:#2f2253}
+*{box-sizing:border-box;margin:0}
+html,body{background:var(--bg);color:var(--ink);font-family:Sora,system-ui,sans-serif;font-size:15px}
+body{padding-bottom:90px;max-width:520px;margin:auto}
+.hero{background:linear-gradient(160deg,var(--p2),var(--p));color:#fff;padding:22px 18px 26px;border-radius:0 0 34px 34px}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.brand{display:flex;align-items:center;gap:8px;font-weight:800;letter-spacing:.5px}
+.gem{width:30px;height:30px;background:linear-gradient(135deg,#ffe9a3,var(--gold2));clip-path:polygon(25% 0,75% 0,100% 35%,50% 100%,0 35%)}
+.gem.big{width:84px;height:84px}
+.chip{background:rgba(255,255,255,.16);border:0;color:#fff;border-radius:20px;padding:7px 13px;font:inherit;font-size:13px}
+h1{font-size:26px}h2{font-size:18px;margin:18px 4px 10px}
+.sub{opacity:.8;font-size:13px;margin-top:4px}
+.bal{font-size:38px;font-weight:800;margin:6px 0 12px}
+.row{display:flex;gap:10px}.row>*{flex:1}
+.glass{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);border-radius:16px;padding:12px}
+.glass small{opacity:.8;display:block;font-size:12px}.glass b{font-size:18px}
+.btn{border:0;border-radius:14px;padding:14px;font:inherit;font-weight:700;color:#2a1a00;background:linear-gradient(180deg,#ffd873,var(--gold2));width:100%;cursor:pointer}
+.btn.alt{background:rgba(255,255,255,.16);color:#fff}.btn.line{background:var(--card);color:var(--p);border:1px solid var(--line)}
+.btn.sm{padding:8px 12px;width:auto;font-size:13px;border-radius:10px}.btn.red{background:var(--bad);color:#fff}.btn.grn{background:var(--ok);color:#fff}
+.btn:disabled{opacity:.5}
+.wrap{padding:0 14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:14px;margin-bottom:10px;display:flex;align-items:center;gap:12px}
+.card.col{display:block}
+.ic{width:46px;height:46px;border-radius:14px;background:var(--line);display:grid;place-items:center;font-size:22px;flex:none}
+.grow{flex:1;min-width:0}.grow b{display:block}.grow span{color:var(--mut);font-size:13px}
+.amt{color:var(--ok);font-weight:800;white-space:nowrap}
+.pill{display:inline-block;background:var(--line);color:var(--p);border-radius:20px;padding:3px 10px;font-size:12px;margin-top:6px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);text-align:center}.stats b{display:block;font-size:18px}.stats span{font-size:12px;color:var(--mut)}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:4px 14px 10px}.tabs button{border:1px solid var(--line);background:var(--card);color:var(--mut);border-radius:20px;padding:8px 15px;font:inherit;font-size:13px;white-space:nowrap}.tabs button.on{background:var(--p);color:#fff;border-color:var(--p)}
+nav{position:fixed;bottom:0;left:0;right:0;max-width:520px;margin:auto;background:var(--card);border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:8px 4px calc(8px + env(safe-area-inset-bottom,0px));z-index:5}
+nav button{background:none;border:0;color:var(--mut);font:inherit;font-size:12px;display:grid;gap:2px;justify-items:center;min-width:56px}nav button.on{color:var(--p);font-weight:700}nav span{font-size:20px}
+nav .mid{margin-top:-26px}nav .mid i{display:grid;place-items:center;width:58px;height:58px;border-radius:50%;background:var(--card);border:3px solid var(--p)}nav .mid .gem{width:32px;height:32px}
+input,select,textarea{width:100%;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;margin:5px 0 9px}
+label{font-size:12px;color:var(--mut)}
+.ov{position:fixed;inset:0;background:rgba(10,4,24,.6);z-index:9;display:flex;align-items:flex-end;justify-content:center}
+.sheet{background:var(--card);width:100%;max-width:520px;border-radius:26px 26px 0 0;padding:20px 16px calc(20px + env(safe-area-inset-bottom,0px));max-height:88%;overflow:auto}
+.toast{position:fixed;top:calc(14px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:14px;z-index:20;font-size:13px}
+.gate{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:24px 16px}
+.gate .hd{text-align:center;margin-bottom:18px}
+.st{font-size:12px;border-radius:10px;padding:2px 8px}.st.Pending{background:#fff2cf;color:#8a6200}.st.Paid,.st.Approved{background:#d8f5e6;color:#116b43}.st.Rejected{background:#fde0e0;color:#962a2a}
+.tbl{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line)}
+img.shot{max-width:100%;border-radius:10px;margin:6px 0}
+@media(prefers-reduced-motion:no-preference){.gem.big{animation:fl 3s ease-in-out infinite}@keyframes fl{50%{transform:translateY(-6px) rotate(4deg)}}}
+</style></head><body><div id="app"></div>
+<script>
+const K='royalgem_v2',today=()=>new Date().toDateString();
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const N=n=>(+Number(n).toFixed(4))+' TON';
+function def(){return{cfg:{daily:0.002,ad:0.001,adsMax:40,ref:0.02,refTask:0.01,minW:0.03,autopay:true,pin:'1234',bot:'RoyalGemBot',support:'@royalgem_support'},
+channels:[{id:1,name:'Royal Gem Official',url:'https://t.me/royalgem'},{id:2,name:'Royal Gem Payouts',url:'https://t.me/royalgempayouts'}],
+tasks:[{id:1,title:'Join our WhatsApp group and stay active',type:'screenshot',reward:0.05,spots:117,url:'https://chat.whatsapp.com/'},{id:2,title:'Join partner channel',type:'join',reward:0.01,spots:167,url:'https://t.me/royalgem'},{id:3,title:'Visit sponsor link',type:'link',reward:0.005,spots:300,url:'https://example.com'}],
+u:{joined:false,task:0,ref:0,done:{},dailyAt:'',ads:0,adsDay:'',friends:0,earnedDay:'',earned:0,id:'RG'+Math.floor(Math.random()*90000+10000)},
+subs:[],wds:[],users:1,nid:10}}
+let S;try{S=JSON.parse(localStorage.getItem(K))}catch(e){}S=S||def();
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+let view='home',ftab='all',atab='over',adm=false;
+const $=id=>document.getElementById(id);
+const ADMIN_ID=8243824380;
+function tgId(){try{const w=window.Telegram&&window.Telegram.WebApp;if(w&&w.initDataUnsafe&&w.initDataUnsafe.user)return w.initDataUnsafe.user.id;const p=new URLSearchParams(location.hash.slice(1)).get('tgWebAppData');if(p)return JSON.parse(new URLSearchParams(p).get('user')).id}catch(e){}return null}
+const isAdmin=()=>tgId()===ADMIN_ID;
+function tgName(){try{const w=window.Telegram&&window.Telegram.WebApp;if(w&&w.initDataUnsafe&&w.initDataUnsafe.user)return w.initDataUnsafe.user.first_name;const p=new URLSearchParams(location.hash.slice(1)).get('tgWebAppData');if(p)return JSON.parse(new URLSearchParams(p).get('user')).first_name}catch(e){}return 'there'}
+let wtab='w';
+const AP=()=>!!(S.cfg.autopay&&S.cfg.pay&&S.cfg.pay.key);
+function autopayHTML(){const p=S.cfg.pay;return`<h2 style="margin-top:0">Autopay provider</h2><div class="card col"><label>Provider name</label><input id="p_name" value="${esc(p.name)}"><label>API base URL</label><input id="p_url" value="${esc(p.url)}" placeholder="https://"><label>API key</label><input id="p_key" type="password" value="${esc(p.key)}" autocomplete="off"><label>API secret (if needed)</label><input id="p_secret" type="password" value="${esc(p.secret)}" autocomplete="off"><label>Payout wallet or account ID</label><input id="p_wallet" value="${esc(p.wallet)}"><button class="btn" onclick="saveAp()">Save provider</button></div><div class="card col"><b>Status: ${p.key?'API key saved':'No API key yet'}</b><br><span class="sub" style="color:var(--mut)">Autopay is ${S.cfg.autopay?'ON':'OFF'}. Withdrawals pay out automatically only when it is ON and a key is saved. Otherwise they wait for approval.</span></div><div class="card col"><span class="sub" style="color:var(--mut)">Keys saved here stay in this browser only. Add the same key to your bot server so it can send the real payouts.</span></div>`}
+function saveAp(){const p=S.cfg.pay;['name','url','key','secret','wallet'].forEach(k=>p[k]=$('p_'+k).value.trim());save();toast('Provider saved');draw()}
+const ago=t=>{const m=Math.floor((Date.now()-t)/60000);return m<1?'Just now':m<60?m+' min ago':m<1440?Math.floor(m/60)+' hr ago':new Date(t).toLocaleDateString()};
+const earnList=()=>(S.u.log||[]).length?S.u.log.slice(0,30).map(l=>`<div class="card"><div class="ic">${l.s||'💎'}</div><div class="grow"><b>${esc(l.w||'Reward')}</b><span>${ago(l.t)}</span></div><div class="amt">+${N(l.n)}</div></div>`).join(''):'<div class="card col" style="text-align:center"><b>No earnings yet</b><br><span class="sub" style="color:var(--mut)">Collect your daily reward to start.</span></div>';
+const LN=['Chidi','Amaka','Tunde','Ngozi','Ibrahim','Zainab','Emeka','Bisi','Seun','Halima'];
+setInterval(()=>{const e=$('tk');if(e)e.textContent=LN[Math.floor(Math.random()*LN.length)]+' just withdrew '+N((Math.random()*0.9+0.05).toFixed(2))},4000);
+const adminBtn=c=>isAdmin()?`<button class="${c}" onclick="adminLogin()">Admin</button>`:'';
+function toast(t){const d=document.createElement('div');d.className='toast';d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),2200)}
+function sheet(html){close();const o=document.createElement('div');o.className='ov';o.id='ov';o.onclick=e=>{if(e.target===o)close()};o.innerHTML='<div class="sheet">'+html+'</div>';document.body.appendChild(o)}
+function close(){const o=$('ov');if(o)o.remove()}
+const total=()=>S.u.task+S.u.ref;
+function credit(n,kind,why,sym){S.u[kind]=+(S.u[kind]+n).toFixed(6);(S.u.log=S.u.log||[]).unshift({n,t:Date.now(),w:why,s:sym});if(S.u.earnedDay!==today()){S.u.earnedDay=today();S.u.earned=0}S.u.earned+=n;save()}
+function go(v){view=v;adm=false;draw()}
+function hero(title,sub,extra=''){return`<div class="hero"><div class="top"><div class="brand"><div class="gem"></div>ROYAL GEM</div>${adminBtn('chip')}</div><h1>${title}</h1><div class="sub">${sub}</div>${extra}</div>`}
+function nav(){const t=[['home','🏠','Home'],['tasks','✅','Tasks'],['earn','','Earn'],['invite','👥','Invite'],['wallet','👛','Wallet']];
+return'<nav>'+t.map(([k,i,l])=>k==='earn'?`<button class="mid ${view===k?'on':''}" onclick="go('earn')"><i><div class="gem"></div></i>${l}</button>`:`<button class="${view===k?'on':''}" onclick="go('${k}')"><span>${i}</span>${l}</button>`).join('')+'</nav>'}
+function draw(){const a=$('app');if(adm){a.innerHTML=adminHTML();return}
+if(!S.u.joined){a.innerHTML=gate();return}
+a.innerHTML=({home,tasks,earn:earn_,invite,wallet})[view]()+nav();window.scrollTo(0,0)}
+function gate(){return`<div class="gate"><div class="hd"><div class="gem big" style="margin:0 auto 14px"></div><h1>Join to continue</h1><div class="sub" style="color:var(--mut)">Join every channel below, then tap verify.</div></div>
+${S.channels.map(c=>`<div class="card"><div class="ic">📣</div><div class="grow"><b>${esc(c.name)}</b><span>Required</span></div><a href="${esc(c.url)}" target="_blank" rel="noopener"><button class="btn sm">Join</button></a></div>`).join('')||'<div class="card">No channels required yet.</div>'}
+<button class="btn" style="margin-top:8px" onclick="verify()">Verify and continue</button>
+${adminBtn('btn line')}</div>`}
+function verify(){S.u.joined=true;save();toast('Verified. Welcome to Royal Gem');draw()}
+function home(){const dOk=S.u.dailyAt!==today(),ed=S.u.earnedDay===today()?S.u.earned:0;
+const fake=['Chidi','Amaka','Tunde','Ngozi','Ibrahim'][Math.floor(Math.random()*5)]+' just withdrew '+N((Math.random()*0.9+0.05).toFixed(2));
+return hero('Hi, '+esc(tgName()),'Earn real TON, paid out automatically.',`<div class="bal">${N(total())}</div><div class="row"><div class="glass"><small>Task balance</small><b>${N(S.u.task)}</b></div><div class="glass"><small>Refer balance</small><b>${N(S.u.ref)}</b></div></div><div class="row" style="margin-top:12px"><button class="btn" onclick="withdrawSheet()">Withdraw</button><button class="btn alt" onclick="go('invite')">Invite</button></div>`)+`<div class="wrap"><div class="card stats" style="margin-top:14px;display:grid"><div><b>${N(ed)}</b><span>Earned today</span></div><div><b>${S.u.friends}</b><span>Friends</span></div><div><b>${Object.keys(S.u.done).length}</b><span>Tasks done</span></div></div>
+<div class="card"><span class="ic" style="background:var(--ok);color:#fff;width:14px;height:14px;border-radius:50%"></span><div class="grow"><b style="font-size:14px" id="tk">${fake}</b></div></div>
+<div class="card" style="background:linear-gradient(120deg,#fff0c4,#ffd873);color:#3a2800;cursor:pointer" onclick="daily()"><div class="ic">🎁</div><div class="grow"><b>${dOk?'Daily reward is ready':'Daily reward collected'}</b><span style="color:#6b4d00">${dOk?'Collect '+N(S.cfg.daily)+' today':'Come back tomorrow'}</span></div></div>
+<h2>Quick actions</h2><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">${[['📺','Watch ads',"ads()"],['🎁','Daily',"daily()"],['✅','Tasks',"go('tasks')"],['👥','Invite',"go('invite')"],['🏆','Leaders',"board()"],['🏦','Withdraw',"withdrawSheet()"],['👛','Wallet',"go('wallet')"],['🆘','Support',"toast('${esc(S.cfg.support)}')"]].map(x=>`<div class="card col" style="text-align:center;padding:12px 4px;cursor:pointer;margin:0" onclick="${x[2]}"><div style="font-size:24px">${x[0]}</div><span style="font-size:12px">${x[1]}</span></div>`).join('')}</div>
+<h2>Withdrawal times</h2><div class="card col"><div class="tbl" style="padding-top:0"><span>Task balance</span><b>Tuesday and Friday</b></div><div class="tbl" style="border:0;padding-bottom:0"><span>Refer balance</span><b>Daily, 4:30 PM</b></div></div></div>`}
+function daily(){if(S.u.dailyAt===today())return toast('Already collected today');S.u.dailyAt=today();credit(S.cfg.daily,'task','Daily reward','🎁');toast('+'+N(S.cfg.daily)+' collected');draw()}
+function ads(){if(S.u.adsDay!==today()){S.u.adsDay=today();S.u.ads=0}if(S.u.ads>=S.cfg.adsMax)return toast('No ads left today');
+let s=5;sheet(`<h2 style="text-align:center">Ad playing</h2><div style="text-align:center;font-size:42px;font-weight:800" id="cd">${s}</div><div class="sub" style="text-align:center;color:var(--mut)">Reward in seconds</div>`);
+const t=setInterval(()=>{s--;const c=$('cd');if(!c)return clearInterval(t);c.textContent=s;if(s<=0){clearInterval(t);S.u.ads++;credit(S.cfg.ad,'task','Watched an ad','📺');close();toast('+'+N(S.cfg.ad));draw()}},1000)}
+function earn_(){return hero('Earn','Pick a way to earn real TON.')+`<div class="wrap" style="margin-top:14px">
+${[['🎁','Daily reward','Collect '+N(S.cfg.daily)+' now',"daily()"],['✅','Tasks','Earn up to '+N(Math.max(0,...S.tasks.map(t=>t.reward)))+' per task',"go('tasks')"],['📺','Watch ads',N(S.cfg.ad)+' each. '+(S.cfg.adsMax-(S.u.adsDay===today()?S.u.ads:0))+' of '+S.cfg.adsMax+' left today',"ads()"],['👥','Invite friends',N(S.cfg.ref)+' for every friend',"go('invite')"],['🏆','Leaderboard','Top 10 inviters win cash prizes',"board()"]].map(x=>`<div class="card" style="cursor:pointer" onclick="${x[3]}"><div class="ic">${x[0]}</div><div class="grow"><b>${x[1]}</b><span>${x[2]}</span></div>›</div>`).join('')}</div>`}
+function tasks(){const L=S.tasks.filter(t=>ftab==='all'||t.type===ftab);const pot=S.tasks.filter(t=>!S.u.done[t.id]).reduce((a,t)=>a+t.reward,0);
+return hero('Tasks','Finish tasks, get paid in TON.')+`<div class="wrap"><div class="card col" style="margin-top:14px"><div style="display:flex;justify-content:space-between"><b>Today</b><b>${Object.keys(S.u.done).length} done</b></div><div style="color:var(--mut);margin-top:8px">Earn up to ${N(pot)} more</div></div></div>
+<div class="tabs">${['all','join','screenshot','link'].map(k=>`<button class="${ftab===k?'on':''}" onclick="ftab='${k}';draw()">${k[0].toUpperCase()+k.slice(1)}</button>`).join('')}</div>
+<div class="wrap"><h2 style="margin-top:0">Available <span style="float:right;color:var(--mut)">${L.length}</span></h2>${L.map(t=>{const st=S.u.done[t.id];return`<div class="card" style="cursor:pointer" onclick="openTask(${t.id})"><div class="ic">${{join:'📣',screenshot:'📸',link:'🔗'}[t.type]}</div><div class="grow"><b>${esc(t.title)}</b><span>${t.type==='screenshot'?'Upload a screenshot':t.type==='join'?'Join and verify':'Open the link'}</span><br><span class="pill">${st?st:t.spots+' spots left'}</span></div><div class="amt">+${N(t.reward)}</div></div>`}).join('')||'<div class="card">No tasks here yet.</div>'}</div>`}
+function openTask(id){const t=S.tasks.find(x=>x.id===id);if(S.u.done[id])return toast('Task '+S.u.done[id].toLowerCase());if(t.spots<=0)return toast('No spots left');
+sheet(`<h2 style="margin-top:0">${esc(t.title)}</h2><div class="amt" style="margin-bottom:10px">+${N(t.reward)}</div><a href="${esc(t.url)}" target="_blank" rel="noopener"><button class="btn line" style="margin-bottom:10px">Open task link</button></a>
+${t.type==='screenshot'?`<label>Upload your screenshot</label><input type="file" id="shot" accept="image/*"><button class="btn" onclick="submitShot(${id})">Submit for review</button>`:`<button class="btn" onclick="claim(${id})">${t.type==='join'?'Verify and claim':'Claim reward'}</button>`}`)}
+function claim(id){const t=S.tasks.find(x=>x.id===id);S.u.done[id]='Approved';t.spots--;credit(t.reward,'task',t.title,'✅');close();toast('+'+N(t.reward)+' added');draw()}
+function submitShot(id){const f=$('shot').files[0];if(!f)return toast('Choose a screenshot first');const r=new FileReader();r.onload=()=>{const t=S.tasks.find(x=>x.id===id);t.spots--;S.u.done[id]='Pending';S.subs.push({id:S.nid++,tid:id,title:t.title,reward:t.reward,img:r.result,st:'Pending',user:S.u.id});save();close();toast('Submitted. Waiting for review');draw()};r.readAsDataURL(f)}
+function invite(){const link='https://t.me/'+S.cfg.bot+'?start='+S.u.id;return hero('Invite friends','Earn '+N(S.cfg.ref)+' for every friend who joins and gets started.')+`<div class="wrap" style="margin-top:14px"><div class="card col"><label>Your invite link</label><input readonly value="${esc(link)}" id="lk"><div class="row"><button class="btn sm" onclick="navigator.clipboard&&navigator.clipboard.writeText($('lk').value);toast('Link copied')">Copy</button><a href="https://t.me/share/url?url=${encodeURIComponent(link)}" target="_blank" rel="noopener"><button class="btn sm" style="width:100%">Share on Telegram</button></a></div></div>
+<div class="card col"><b>1.</b> Friend joins with your link and the channels: ${N(S.cfg.refTask)}<br><br><b>2.</b> Friend gets 3 screenshot tasks approved: +${N(S.cfg.ref-S.cfg.refTask)}</div>
+<div class="card stats" style="display:grid"><div><b>${S.u.friends}</b><span>Joined</span></div><div><b>${N(S.u.ref)}</b><span>Earned</span></div><div><b>0</b><span>In review</span></div></div>
+<div class="card" style="cursor:pointer" onclick="board()"><div class="ic">🏆</div><div class="grow"><b>Leaderboard</b><span>Invite friends to win prizes</span></div>›</div></div>`}
+function board(){const L=[['Chioma',48],['Emeka',41],['Fatima',33],['You',S.u.friends]].sort((a,b)=>b[1]-a[1]);sheet('<h2 style="margin-top:0">Leaderboard</h2>'+L.map((x,i)=>`<div class="tbl"><span>${i+1}. ${x[0]}</span><b>${x[1]} invites</b></div>`).join(''))}
+function wallet(){return hero('Wallet','Total balance',`<div class="bal">${N(total())}</div><div class="row"><div class="glass"><small>Task balance</small><b>${N(S.u.task)}</b><small style="color:var(--gold)">Opens Tuesday</small></div><div class="glass"><small>Refer balance</small><b>${N(S.u.ref)}</b><small style="color:#b9f0d2">Opens 4:30 PM</small></div></div>`)+`<div class="wrap" style="margin-top:14px"><button class="btn" onclick="withdrawSheet()">Withdraw</button><div class="tabs" style="padding:12px 0 8px"><button class="${wtab==='w'?'on':''}" onclick="wtab='w';draw()">Withdrawals</button><button class="${wtab==='e'?'on':''}" onclick="wtab='e';draw()">Earnings</button></div>${wtab==='e'?earnList():S.wds.length?S.wds.slice().reverse().map(w=>`<div class="card"><div class="grow"><b>${N(w.amt)}</b><span>${esc(w.bank)} · ${esc(w.acc)}</span></div><span class="st ${w.st}">${w.st}</span></div>`).join(''):'<div class="card col" style="text-align:center"><div class="gem big" style="margin:10px auto"></div><b>No withdrawals yet</b></div>'}<div class="sub" style="text-align:center;color:var(--mut)">Declined money returns to the same balance.</div></div>`}
+function withdrawSheet(){sheet(`<h2 style="margin-top:0">Withdraw</h2><div class="sub" style="color:var(--mut)">Minimum ${N(S.cfg.minW)}. ${AP()?'Paid out automatically.':'Paid after admin approval.'}</div><label>Amount</label><input id="wa" type="number" value="${total()}"><label>TON wallet address</label><input id="wn" placeholder="UQ..."><label>Memo or comment (optional)</label><input id="wm"><button class="btn" onclick="doW()">Withdraw now</button>`)}
+function doW(){const a=+$('wa').value,b='TON',n=$('wn').value.trim(),m=$('wm').value.trim();
+if(a<S.cfg.minW)return toast('Minimum is '+N(S.cfg.minW));if(a>total())return toast('Not enough balance');if(!/^(UQ|EQ|kQ|0Q)[A-Za-z0-9_-]{46}$/.test(n))return toast('Enter a valid TON wallet address');
+let r=a;const t=Math.min(S.u.task,r);S.u.task-=t;r-=t;S.u.ref-=r;S.wds.push({id:S.nid++,amt:a,bank:b,acc:n,name:m,st:AP()?'Paid':'Pending',user:S.u.id});save();close();toast(AP()?'Paid out '+N(a):'Request sent');draw()}
+/* admin */
+function adminLogin(){if(!isAdmin())return toast('Admins only');sheet('<h2 style="margin-top:0">Admin login</h2><label>PIN</label><input id="pin" type="password" inputmode="numeric"><button class="btn" onclick="if($(\'pin\').value===S.cfg.pin){adm=true;close();draw()}else toast(\'Wrong PIN\')">Open admin</button><div class="sub" style="color:var(--mut)">Default PIN is 1234. Change it in Settings.</div>')}
+function adminHTML(){const T=[['over','Overview'],['ch','Channels'],['tk','Tasks'],['rv','Review'],['po','Payouts'],['ap','Autopay'],['se','Settings']];
+return hero('Admin','Manage Royal Gem')+`<div class="tabs" style="margin-top:14px">${T.map(([k,l])=>`<button class="${atab===k?'on':''}" onclick="atab='${k}';draw()">${l}</button>`).join('')}</div><div class="wrap">${aBody()}<button class="btn line" onclick="go('home')" style="margin-top:14px">Exit admin</button></div>`}
+function aBody(){const c=S.cfg;c.pay=c.pay||{name:'PT Exchange',key:'',secret:'',url:'',wallet:''};
+if(atab==='over'){const paid=S.wds.filter(w=>w.st==='Paid').reduce((a,w)=>a+w.amt,0);return`<div class="card stats" style="display:grid"><div><b>${S.users}</b><span>Users</span></div><div><b>${S.tasks.length}</b><span>Tasks</span></div><div><b>${S.channels.length}</b><span>Channels</span></div></div><div class="card stats" style="display:grid"><div><b>${S.subs.filter(s=>s.st==='Pending').length}</b><span>To review</span></div><div><b>${S.wds.length}</b><span>Payouts</span></div><div><b>${N(paid)}</b><span>Paid</span></div></div><div class="card col"><b>Autopay is ${c.autopay?'ON':'OFF'}</b><br><span class="sub" style="color:var(--mut)">Change it in Settings.</span></div>`}
+if(atab==='ch')return`<h2 style="margin-top:0">Must-join channels</h2>${S.channels.map(x=>`<div class="card"><div class="grow"><b>${esc(x.name)}</b><span>${esc(x.url)}</span></div><button class="btn sm red" onclick="S.channels=S.channels.filter(c=>c.id!==${x.id});save();draw()">Remove</button></div>`).join('')||'<div class="card">No channels yet.</div>'}<div class="card col"><label>Channel name</label><input id="cn"><label>Channel link</label><input id="cu" placeholder="https://t.me/yourchannel"><button class="btn" onclick="addCh()">Add channel</button></div>`;
+if(atab==='tk')return`<h2 style="margin-top:0">Tasks</h2>${S.tasks.map(x=>`<div class="card"><div class="grow"><b>${esc(x.title)}</b><span>${x.type} · ${N(x.reward)} · ${x.spots} spots</span></div><button class="btn sm red" onclick="S.tasks=S.tasks.filter(c=>c.id!==${x.id});save();draw()">Delete</button></div>`).join('')}<div class="card col"><b>Add a task</b><br><label>Title</label><input id="tt"><label>Type</label><select id="ty"><option value="screenshot">Screenshot</option><option value="join">Join</option><option value="link">Link</option></select><label>Link</label><input id="tu" placeholder="https://"><div class="row"><div><label>Reward (TON)</label><input id="tr" type="number" step="any" value="0.01"></div><div><label>Spots</label><input id="ts" type="number" value="100"></div></div><button class="btn" onclick="addTk()">Add task</button></div>`;
+if(atab==='rv'){const P=S.subs.filter(s=>s.st==='Pending');return`<h2 style="margin-top:0">Screenshots to review</h2>${P.map(s=>`<div class="card col"><b>${esc(s.title)}</b><span class="sub" style="color:var(--mut)">${s.user} · ${N(s.reward)}</span><img class="shot" src="${s.img}"><div class="row"><button class="btn sm grn" onclick="rev(${s.id},1)">Approve</button><button class="btn sm red" onclick="rev(${s.id},0)">Reject</button></div></div>`).join('')||'<div class="card">Nothing to review.</div>'}`}
+if(atab==='ap')return autopayHTML();if(atab==='po')return`<h2 style="margin-top:0">Payouts</h2>${S.wds.slice().reverse().map(w=>`<div class="card col"><div class="tbl" style="border:0"><b>${N(w.amt)}</b><span class="st ${w.st}">${w.st}</span></div><span class="sub" style="color:var(--mut)">${esc(w.name)} · ${esc(w.bank)} ${esc(w.acc)}</span>${w.st==='Pending'?`<div class="row" style="margin-top:8px"><button class="btn sm grn" onclick="pay(${w.id},1)">Mark paid</button><button class="btn sm red" onclick="pay(${w.id},0)">Decline</button></div>`:''}</div>`).join('')||'<div class="card">No payouts yet.</div>'}`;
+return`<h2 style="margin-top:0">Settings</h2><div class="card col"><label>Autopay</label><select id="s_ap"><option value="1" ${c.autopay?'selected':''}>On: pay instantly</option><option value="0" ${c.autopay?'':'selected'}>Off: approve manually</option></select>${[['daily','Daily reward (TON)'],['ad','Reward per ad (TON)'],['adsMax','Ads per day'],['ref','Referral total (TON)'],['refTask','Referral joins part (TON)'],['minW','Minimum withdraw (TON)']].map(([k,l])=>`<label>${l}</label><input id="s_${k}" type="number" step="any" value="${c[k]}">`).join('')}<label>Bot username</label><input id="s_bot" value="${esc(c.bot)}"><label>Support handle</label><input id="s_support" value="${esc(c.support)}"><label>Admin PIN</label><input id="s_pin" value="${esc(c.pin)}"><button class="btn" onclick="saveSet()">Save settings</button></div><button class="btn line" onclick="if(confirm('Reset all data?')){S=def();save();draw()}">Reset all data</button>`}
+function addCh(){const n=$('cn').value.trim(),u=$('cu').value.trim();if(!n||!/^https?:\/\//.test(u))return toast('Enter a name and a full link');S.channels.push({id:S.nid++,name:n,url:u});save();toast('Channel added');draw()}
+function addTk(){const t=$('tt').value.trim(),u=$('tu').value.trim();if(!t)return toast('Enter a title');S.tasks.push({id:S.nid++,title:t,type:$('ty').value,reward:+$('tr').value||0,spots:+$('ts').value||0,url:u||'#'});save();toast('Task added');draw()}
+function rev(id,ok){const s=S.subs.find(x=>x.id===id);s.st=ok?'Approved':'Rejected';if(s.user===S.u.id){S.u.done[s.tid]=s.st;if(ok)credit(s.reward,'task')}save();draw()}
+function pay(id,ok){const w=S.wds.find(x=>x.id===id);w.st=ok?'Paid':'Rejected';if(!ok&&w.user===S.u.id)S.u.task+=w.amt;save();draw()}
+function saveSet(){const c=S.cfg;c.autopay=$('s_ap').value==='1';['daily','ad','adsMax','ref','refTask','minW'].forEach(k=>c[k]=+$('s_'+k).value||0);['bot','support','pin'].forEach(k=>c[k]=$('s_'+k).value.trim()||c[k]);save();toast('Settings saved');draw()}
+const splash=()=>`<div style="position:fixed;inset:0;background:linear-gradient(160deg,#1a0838,#4a22a0);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;z-index:30;gap:14px;text-align:center"><div class="gem big"></div><h1 style="letter-spacing:8px">ROYAL GEM</h1><div class="sub">Earn TON, the simple way</div><div style="width:240px;height:6px;background:rgba(255,255,255,.2);border-radius:6px;overflow:hidden"><i id="pb" style="display:block;height:100%;width:0;background:linear-gradient(90deg,#ffe9a3,#d99a1e);transition:width 1.6s"></i></div><div class="sub" style="letter-spacing:3px">SIGNING YOU IN</div></div>`;
+$('app').innerHTML=splash();setTimeout(()=>{const b=$('pb');if(b)b.style.width='100%'},40);setTimeout(draw,1900);
+</script></body></html>
